@@ -8,4 +8,11 @@ def print_names():
         print(name)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     print_names()
+=======
+
+    for name in dir(hidden_4):
+        if not name.startswith('__'):
+            print(name)
+>>>>>>> refs/remotes/origin/main
