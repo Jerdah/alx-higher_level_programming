@@ -11,3 +11,6 @@ def magic_calculation(a, b):
         return c
     else:
         return sub(a, b)
+
+    print(magic_calculation(1, 3))  # Output: 8 (1 + 3 + 4 + 5)
+    print(magic_calculation(6, 3))  # Output: 3 (6 - 3)
