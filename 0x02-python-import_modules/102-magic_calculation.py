@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 def magic_calculation(a, b):
+    a = 10
+    b = 5
+    result = 0
+
     if a < b:
         add = __import__('magic_calculation_102').add
         sub = __import__('magic_calculation_102').sub
