@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 def magic_calculation(a, b):
+    """Function that does as give Python bytecode"""
     from magic_calculation_102 import add, sub
     if a < b:
         c = add(a, b)
