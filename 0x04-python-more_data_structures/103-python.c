@@ -1,11 +1,8 @@
 #include <Python.h>
 
 /**
- * print_python_list - Prints basic info about Python lists.
- * @p: A pointer to a Python object (expected to be a PyListObject).
- *
- * This function prints the size of the Python list, the amount of space
- * allocated for the list, and the type of each element in the list.
+ * print_python_list - Function prints basic info about Python lists.
+ * @p: pointer to a Python object
  */
 void print_python_list(PyObject *p)
 {
@@ -14,7 +11,7 @@ void print_python_list(PyObject *p)
 	int i;
 
 	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %ld\n", size);
+	printf("[*] Size of Python List = %ld\n", size);
 	printf("[*] Allocated = %ld\n", alloc);
 
 	for (i = 0; i < size; i++)
@@ -24,13 +21,8 @@ void print_python_list(PyObject *p)
 }
 
 /**
- * print_python_bytes - Prints basic info about Pthon bytes objects.
- * @p: A pointer to a Python object (expected to be a PyBytesObject).
- *
- * This function prints the size of the Python bytes object, the string
- * representation of the bytes object, and the first 10 bytes of the bytes
- * object. If the object is not a valid PyBytesObject, it prints an error
- * message.
+ * print_python_bytes - Function prints basic info about Python bytes objects.
+ * @p: pointer to a Python object
  */
 void print_python_bytes(PyObject *p)
 {

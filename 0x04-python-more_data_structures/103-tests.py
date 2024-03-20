@@ -28,4 +28,4 @@ l.pop()
 lib.print_python_list(l)
 l = ["Holberton"]
 lib.print_python_list(l)
-lib.prit_python_bytes(l);
+lib.print_python_bytes(l);
