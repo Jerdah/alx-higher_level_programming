@@ -1,6 +1,7 @@
 #include <Python.h>
 #include <object.h>
 #include <listobject.h>
+#include <bytesobject.h>
 
 /**
  * print_python_list - Function prints basic info about Python lists.
@@ -43,12 +44,12 @@ void print_python_bytes(PyObject *p)
 	size = PyBytes_Size(p);
 	printf("  size: %ld\n", size);
 
-	trying_str = PyBytes_AsString(p);
+	trying_str = (char *)PyBytes_AsString(p);
 	printf("  trying string: %s\n", trying_str);
 
 	printf("  first %ld bytes: ", (size < 10) ? size + 1 : 10);
 	for (i = 0; i < ((size < 10) ? size : 10); i++)
-		printf("%02x ", (unsigned char)trying_str[i]);
+		printf("%02hhx ", (unsigned char)trying_str[i]);
 
 	printf("\n");
 }
