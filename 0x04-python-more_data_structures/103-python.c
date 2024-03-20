@@ -26,9 +26,9 @@ void print_python_list(PyObject *p)
  */
 void print_python_bytes(PyObject *p)
 {
+	char *trying_str;
 	long int size;
 	int i;
-	char *trying_str = NULL;
 
 	printf("[.] bytes object info\n");
 
@@ -39,20 +39,14 @@ void print_python_bytes(PyObject *p)
 	}
 
 	size = PyBytes_Size(p);
-	trying_str = PyBytes_AsString(p);
-
 	printf("  size: %ld\n", size);
+
+	trying_str = PyBytes_AsString(p);
 	printf("  trying string: %s\n", trying_str);
-	printf("  first %ld bytes: ", size + 1 < 10 ? size + 1 : 10);
 
-	for (i = 0; i < size + 1 && i < 10; i++)
-	{
-		printf("%02hhx%s", trying_str[i],
-				i + 1 < size + 1 && i + 1 < 10 ? " " : "\n");
-	}
+	printf("  first %ld bytes: ", (size < 10) ? size + 1 : 10);
+	for (i = 0; i < ((size < 10) ? size : 10); i++)
+		printf("%02x ", (unsigned char)trying_str[i]);
 
-	if (i < 10)
-	{
-		printf("\n");
-	}
+	printf("\n");
 }
