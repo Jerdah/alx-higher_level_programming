@@ -2,6 +2,10 @@
 
 def simple_delete(a_dictionary, key=""):
     """Function deletes a key in a dictionary"""
-    if key in a_dictionary:
-        del a_dictionary[key]
-    return a_dictionary
+        if a_dictionary is not None:
+        try:
+            del a_dictionary[key]
+        except KeyError:
+            pass
+        return a_dictionary
+    return None
