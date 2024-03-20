@@ -4,7 +4,7 @@
 #include <bytesobject.h>
 
 /**
- * print_python_list - Prints basic info about Python lists.
+ * print_python_list - Function prints basic info about Python lists.
  * @p: A pointer to a Python object (expected to be a PyListObject).
  */
 void print_python_list(PyObject *p)
