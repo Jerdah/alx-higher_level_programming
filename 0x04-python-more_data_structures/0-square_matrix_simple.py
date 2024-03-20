@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
 def square_matrix_simple(matrix=[]):
-    """Function computes square valure of all integers of a matrix"""
-    return [[element**2 for element in row] for row in matrix]
+    if matrix is not None:
+        return list(map(
+            lambda row: list(map(
+                lambda x: x ** 2, row
+                )),
+            matrix
+            ))
+        return None
