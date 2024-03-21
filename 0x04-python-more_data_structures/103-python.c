@@ -23,37 +23,29 @@ void print_python_bytes_info(PyObject *p)
 	printf("  size: %ld\n", size);
 
 	printf("  trying string: ");
-	int printable = 0;
+    int printable = 0;
+    for (i = 0; i < size; i++)
+    {
+        if (str[i] >= 32 && str[i] <= 126)
+        {
+            printf("%c", str[i]);
+            printable = 1;
+        }
+    }
+    if (!printable)
+        printf("�");
+    printf("\n");
 
-	for (i = 0; i < size; i++)
-	{
-		if (str[i] >= 32 && str[i] <= 126)
-		{
-			printf("%c", str[i]);
-			printable = 1;
-		}
-
-		else
-		{
-			printable = 0;
-			break;
-		}
-	}
-	if (!printable)
-		printf("�");
-	printf("\n");
-
-	printf("  first %ld bytes:", (size + 1 < 10) ? size + 1 : 10);
-	for (i = 0; i < ((size + 1 < 10) ? size + 1 : 10); i++)
-	{
-		if (i == size)
-			printf(" 00");
-		else
-			printf(" %02x", (unsigned char)str[i]);
-	}
-	printf("\n");
+    printf("  first %ld bytes:", (size + 1 < 10) ? size + 1 : 10);
+    for (i = 0; i < ((size + 1 < 10) ? size + 1 : 10); i++)
+    {
+        if (i == size)
+            printf(" 00");
+        else
+            printf(" %02x", (unsigned char)str[i]);
+    }
+    printf("\n");
 }
-
 /**
  * print_python_bytes - Print information about a Python bytes object
  * @p: Pointer to the Python bytes object
@@ -73,6 +65,12 @@ void print_python_list(PyObject *p)
 	PyObject *item;
 
 	printf("[*] Python list info\n");
+
+	if (!PyList_Check(p))
+	{
+		printf("  [ERROR] Invalid List Object\n");
+		return;
+	}
 
 	size = PyList_Size(p);
 	printf("[*] Size of the Python List = %ld\n", size);
