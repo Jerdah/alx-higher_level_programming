@@ -1,8 +1,11 @@
 #include <Python.h>
+#include <object.h>
+#include <bytesobject.h>
+#include <listobject.h>
 #include <stdio.h>
 
 /**
- * print_python_bytes_info - Print information abut a Python bytes object
+ * print_python_bytes_info - Function prints information abut a Python bytes object
  * @p: Pointer to the Python bytes object
  */
 void print_python_bytes_info(PyObject *p)
@@ -23,31 +26,33 @@ void print_python_bytes_info(PyObject *p)
 	printf("  size: %ld\n", size);
 
 	printf("  trying string: ");
-    int printable = 0;
-    for (i = 0; i < size; i++)
-    {
-        if (str[i] >= 32 && str[i] <= 126)
-        {
-            printf("%c", str[i]);
-            printable = 1;
-        }
-    }
-    if (!printable)
-        printf("�");
-    printf("\n");
+	int printable = 0;
 
-    printf("  first %ld bytes:", (size + 1 < 10) ? size + 1 : 10);
-    for (i = 0; i < ((size + 1 < 10) ? size + 1 : 10); i++)
-    {
-        if (i == size)
-            printf(" 00");
-        else
-            printf(" %02x", (unsigned char)str[i]);
-    }
-    printf("\n");
+	for (i = 0; i < size; i++)
+	{
+		if (str[i] >= 32 && str[i] <= 126)
+		{
+			printf("%c", str[i]);
+			printable = 1;
+		}
+	}
+	if (!printable)
+		printf("�");
+	printf("\n");
+
+	printf("  first %ld bytes:", (size + 1 < 10) ? size + 1 : 10);
+
+	for (i = 0; i < ((size + 1 < 10) ? size + 1 : 10); i++)
+	{
+		if (i == size)
+			printf(" 00");
+		else
+			printf(" %02x", (unsigned char)str[i]);
+	}
+	printf("\n");
 }
 /**
- * print_python_bytes - Print information about a Python bytes object
+ * print_python_bytes - Fucntion prints information about a Python bytes object
  * @p: Pointer to the Python bytes object
  */
 void print_python_bytes(PyObject *p)
@@ -79,23 +84,10 @@ void print_python_list(PyObject *p)
 
 	for (i = 0; i < size; i++)
 	{
-		item = PyList_GetItem(p, i);
-		printf("Element %ld: ", i);
+		item = PyList_GET_ITEM(p, i);
+		printf("Element %ld: %s\n", i, Py_TYPE(item)->tp_name);
 
 		if (PyBytes_Check(item))
-		{
-			printf("bytes\n");
-			print_python_bytes_info(item);
-		}
-		else if (PyFloat_Check(item))
-			printf("float\n");
-		else if (PyTuple_Check(item))
-			printf("tuple\n");
-		else if (PyList_Check(item))
-			printf("list\n");
-		else if (PyUnicode_Check(item))
-			printf("str\n");
-		else
-			printf("%s\n", Py_TYPE(item)->tp_name);
+			print_python_bytes(item);
 	}
 }
